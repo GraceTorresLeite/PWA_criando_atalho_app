@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet" type="text/css" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0ScZNt-OU8v6AGuCnXjy0Ebfpg6AFX181jppzNGjwoHFp-bnD&s"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="manifest" href="manifest.json"/>
+<style>
+body {
+background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Sky-Wallpapers-Free-Download-Photo.jpg');
+
+background-repeat: no-repeat;
+background-position: center;
+margin: 0;
+background-attachment: fixed;
+}
+h1.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}
+  .starter-template {
+padding: 3rem 1.5rem;
+text-align: center;
+}
+h2.icone {
+    position: right;
+    
+}
+
+#icone_gps{
+    width: 120em;
+    height: 20em;
+    min-height: auto;
+    position: absolute;
+}
+
+.container{
+
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+/*height: 100vh;*/
+width: 100%;
+height: 100%;
+}
+
+@media (min-width: sm) {
+body{background-size: contain;
+
+}
+.container{
+background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Sky-Wallpapers-Free-Download-Photo.jpg');
+
+}
+}
+
+@media (min-width: md) {
+
+.container{
+/*background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Sky-Wallpapers-Free-Download-Photo.jpg');*/
+}
+@media (min-width: xs) {
+.container{
+/*background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Sky-Wallpapers-Free-Download-Photo.jpg');*/
+/*width: 100vh;*/
+
+}
+}
+@media (min-width: lg) {
+.container{
+/*background-image: url('https://www.pixelstalk.net/wp-content/uploads/2016/05/Sky-Wallpapers-Free-Download-Photo.jpg');*/
+/*width: 100vh;*/
+
+}
+}
+
+</style>
+<title>Meu Clima</title>
+</head>
+<div id="icone_gps"  style="width:30%">
+      <h2 class="icone"><img src="icone_gps.png" alt="Logotipo" ></h2>
+    </div>
+<body>
+
+<div id="app">
+<div class="container">
+
+<div class="row">
+<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12"/>
+<form action="" method="" id="cadastrar" onSubmit="return false;" >
+<div class="form-group">
+	<div id="left">
+<h1 class="blocktext"><label for="cidade">Cidade</label></h1>
+<div class="center_left"></div>
+        </div>
+<input type="text" class="form-control" id="cidade" v-model="cidade" aria-describedby="cidade" placeholder="Cidade para procurar">
+</div>
+
+<button class="btn btn-primary" @click="buscaClima()">Busca Clima</button>
+</form>
+</div>
+<!-- MENSAGEM DE ERRO OPCIONAL -->
+<!-- <div v-if="err" class="alert alert-danger" role="alert"> {{ msg }} </div> -->
+
+</div>
+
+<div class="row">
+
+<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 ">
+<table class="table">
+<thead>
+<tr>
+
+<th scope="col">Temperatura</th>
+<th scope="col">Pressão</th>
+<th scope="col">Umidade</th>
+<th scope="col">Velocidade do Vento</th>
+<th scope="col">Direção do vento</th>
+<th scope="col">Cidade</th>
+<th scope="col">Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{ temperatura }}</td>
+<td>{{ pressao }}</td>
+<td>{{ umidade }}</td>
+<td>{{ vento_velocidade }}</td>
+<td>{{ vento_direcao }}</td>
+<td>{{ cidade_name }}</td>
+<td>{{ data_hoje }}</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+const app = new Vue({
+el: '#app',
+data: {
+cidade:'',
+temperatura:0,
+pressao:0,
+umidade:0,
+vento_velocidade:0,
+vento_direcao:0,
+cidade_name:'',
+data_hoje:0,
+timezone:0
+},
+methods:{
+buscaClima(){
+const API_KEY='5eb1b1cb4b1a452aab073b32f03c4b4d';
+let url = 'http://api.openweathermap.org/data/2.5/weather?q=Porto%20Alegre&units=metrics&APPID=' + API_KEY;
+axios.get(url).then((response)=>{
+const dados = response.data;
+
+this.temperatura = (dados.main.temp - 273.15);
+this.pressao = dados.main.pressure;
+this.umidade = dados.main.humidity;
+this.vento_velocidade = dados.wind.speed;
+this.vento_direcao =  dados.wind.deg;
+this.cidade_name = dados.name;
+this.data_hoje = dados.dt;
+this.timezone = dados.timezone;
+/*$.getJSON(weatherAPI, function(displayWeather) {
+                    let temp = Math.round(displayWeather.main.temp);
+                    let tempF = temp;
+   let tempC = ((temp -32) * 5 )/ 9;((dados.main.temp -32)*5/9);
+   dados.temperatura
+   let c = ((this.temperatura - 32)*5/9);*/
+console.log("temp: " ,  this.temperatura );
+console.log('cidade: ', this.cidade_name);
+
+let hoje = new Date (this.data_hoje*1000);
+console.log('data: ', hoje);
+console.log('TZ: ', this.timezone);
+
+
+}).catch((error) => {
+console.log('ERR: '+ error);
+
+          }); //axios
+        }// function
+      }// methods
+      }); //veu
+  </script>
+  <script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+   navigator.serviceWorker.register('./service_worker.js').then( () => {
+    console.log('Service Worker Registered')
+   })
+ })
+} else {
+	console.log('Service Worker NOT Registered');
+}
+</script>
+
+
+</body>
+</html>
