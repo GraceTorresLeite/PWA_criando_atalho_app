@@ -201,8 +201,9 @@ console.log('ERR: '+ error);
   <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-   navigator.serviceWorker.register('./service_worker.js').then( () => {
-    console.log('Service Worker Registered')
+   navigator.serviceWorker.register("/sw.js")
+   .then( function(registration) {
+    console.log('Service Worker Registered', registration.scope);
    })
  })
 } else {
