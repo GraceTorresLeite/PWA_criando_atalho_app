@@ -12,3 +12,13 @@ PWA - precisa ter: HTML +css
                                          workbox generate SW __________ config file
       
 Index.html ( com : <link rel="manifest" href= "manifest.json"> -> este json foi criado no:  /https://app-manifest.firebaseapp.com/
+
+
+{
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "scope": "/",        _________> todo o site
+  "start_url": "/"      ________> "/index.html"
+}
+
