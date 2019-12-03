@@ -11,3 +11,4 @@ PWA - precisa ter: HTML +css
                                          workbox wizard
                                          workbox generate SW __________ config file
       
+Index.html ( com : <link rel="manifest" href= "manifest.json"> -> este json foi criado no:  /https://app-manifest.firebaseapp.com/
