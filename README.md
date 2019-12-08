@@ -2,7 +2,7 @@
 npm install http-server -g ( interpretador de javaScript para desktopp) (npm - node packge manager) /-g/ instalar de forma global na máquina
 
 *PWA - standalone
-*PWA workbox-cli
+*PWA workbox-cli --global
 *PWA vue-cli (Não precisa do manifest se usar)
 
 PWA - precisa ter: HTML +css
